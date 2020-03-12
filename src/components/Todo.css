@@ -1,0 +1,17 @@
+.chore{
+    text-decoration: none;
+    background-color: white;
+    border: black 2px solid;
+    margin:1%;
+    width:50%;
+    text-align: center;
+}
+.chorecompleted{
+    text-decoration: line-through;
+    background: black;
+    color:white;
+    border: white 2px solid;
+    margin:1%;
+    width:50%;
+    text-align: center;
+}
