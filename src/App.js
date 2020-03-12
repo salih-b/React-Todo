@@ -2,6 +2,7 @@ import React from 'react';
 
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
+import './components/Todo.css';
 
 //list
 const tasks = 
@@ -28,7 +29,7 @@ const tasks =
     super();
     this.state ={
       tasks, 
-      name:'' 
+      chore:'' 
     };
   }
   //constructor ends
@@ -49,39 +50,43 @@ this.setState({
 };
 
 // props handlers 
-addChore(choreName) {
-  const newChore = {
-    task: choreName,
-    id: Date.now(),
-    completed:false
-  };
-  this.setState({
-    tasks: [...this.state.tasks, newChore]
+addChore = e => {
+  e.preventDefault();
+  const newChore = { task: this.state.chore, completed: false, id: Date.now() };
+  this.setState({ 
+    tasks: [...this.state.tasks, newChore], 
+    chore: '' 
   });
+};
+
+handle_TF_change = e =>{
+  this.setState({chore: e.target.value});
 }
 
-handleClearButton (){
-  function filterChore (chore){
-      if (chore.completed === true){
-          return true;
-      } 
-  }
+handleClearButton = e => {
+  e.preventDefault();
+  let tasks = this.state.tasks.filter(chore => !chore.completed);
+  this.setState({ tasks });
+};
   
-  this.setState({tasks: this.state.tasks.filter(filterChore)})
   
-  }
 
   render() {
     return (
-      <div>
+      <div className="todo_all">
         <div>
           <h1>To-Do List</h1>
-          <TodoForm addChore={this.addChore}/>
+          <TodoForm 
+          addChore={this.addChore} 
+          handle_TF_change={this.handle_TF_change}
+          value={this.state.chore}
+          handleClearButton={this.handleClearButton}
+          />
         </div>
         <TodoList
         tasks={this.state.tasks}
         toggleCompleted={this.toggleCompleted}
-        handleClearButton={this.handleClearButton}
+        
         />
       </div>
     );

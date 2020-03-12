@@ -9,7 +9,7 @@ const TodoList = props => {
 
 
 return (
-    <div>
+    <div className="chores_list">
         {props.tasks.map(chore => (
             <Todo
             key={chore.id}
@@ -17,9 +17,6 @@ return (
             toggleCompleted={props.toggleCompleted}
             />
         ))}
-        <button 
-        onClick={props.handleClearButton}
-        >Clear Completed</button>
     </div>
 );
 };
